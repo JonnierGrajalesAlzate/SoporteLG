@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import logo2 from "../assets/logo2.png";
 
 function Sidebar() {
 
@@ -10,12 +11,14 @@ return (
 
         <div className="p-6 border-b border-slate-800">
 
-            <h1 className="text-2xl font-bold">
-                LG Soporte
-            </h1>
+            <img
+                                    src={logo2}
+                                    alt="Logo"
+                                    className="w-48 h-48 object-contain mb-4"
+                                />
 
             <p className="text-slate-400 text-sm">
-                Mesa de Ayuda Corporativa
+                Mesa de Ayuda LG
             </p>
 
         </div>

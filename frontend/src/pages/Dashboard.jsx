@@ -144,7 +144,7 @@ return (
 
             </div>
 
-            <div className="bg-gradient-to-r from-emerald-600 to-teal-500 rounded-3xl text-white p-8 shadow-lg">
+            <div className="bg-gradient-to-r from-emerald-600 to-teal-400 rounded-3xl text-white p-8 shadow-lg">
 
                 <h3 className="text-2xl font-bold">
                     Ver Mis Solicitudes
