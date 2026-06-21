@@ -43,3 +43,81 @@ export const getDashboard = async (req, res) => {
 
     }
 };
+export const getUltimosTickets = async (req, res) => {
+    try {
+
+        const { usuarioId } = req.params;
+
+        const result = await pool.query(
+            `
+            SELECT
+                t.id,
+                t.titulo,
+                c.nombre AS categoria,
+                e.nombre AS estado,
+                p.nombre AS prioridad,
+                t.fecha_creacion
+            FROM tickets t
+            INNER JOIN categorias c
+                ON c.id = t.categoria_id
+            INNER JOIN estados e
+                ON e.id = t.estado_id
+            INNER JOIN prioridades p
+                ON p.id = t.prioridad_id
+            WHERE t.usuario_id = $1
+            ORDER BY t.fecha_creacion DESC
+            LIMIT 3
+            `,
+            [usuarioId]
+        );
+
+        res.json(result.rows);
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+            message: "Error obteniendo tickets"
+        });
+
+    }
+};export const TodosTickets = async (req, res) => {
+    try {
+
+        const { usuarioId } = req.params;
+
+        const result = await pool.query(
+            `
+            SELECT
+                t.id,
+                t.titulo,
+                c.nombre AS categoria,
+                e.nombre AS estado,
+                p.nombre AS prioridad,
+                t.fecha_creacion
+            FROM tickets t
+            INNER JOIN categorias c
+                ON c.id = t.categoria_id
+            INNER JOIN estados e
+                ON e.id = t.estado_id
+            INNER JOIN prioridades p
+                ON p.id = t.prioridad_id
+            WHERE t.usuario_id = $1
+            ORDER BY t.fecha_creacion DESC
+            `,
+            [usuarioId]
+        );
+
+        res.json(result.rows);
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+            message: "Error obteniendo tickets"
+        });
+
+    }
+};

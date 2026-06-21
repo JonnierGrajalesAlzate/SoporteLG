@@ -12,6 +12,7 @@ export const login = async (req, res) => {
                 u.nombre,
                 u.apellido,
                 u.correo,
+                u.cargo,
                 r.nombre AS rol,
                 u.password
             FROM usuarios u
@@ -53,5 +54,6 @@ export const login = async (req, res) => {
             success: false,
             message: "Error interno"
         });
+
     }
 };
