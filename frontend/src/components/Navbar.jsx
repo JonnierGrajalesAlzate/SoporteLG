@@ -1,13 +1,5 @@
 function Navbar() {
-    return (
-        <nav className="navbar navbar-dark bg-dark">
-            <div className="container-fluid">
-                <span className="navbar-brand">
-                    Mesa de Ayuda
-                </span>
-            </div>
-        </nav>
-    );
+    return null;
 }
 
 export default Navbar;

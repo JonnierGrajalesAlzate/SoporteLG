@@ -10,3 +10,18 @@ export const getDashboard = async (usuarioId) => {
 
     return response.data;
 };
+export const getUltimosTickets = async (usuarioId) => {
+
+    const response = await axios.get(
+        `${API_URL}/ultimos-tickets/${usuarioId}`
+    );
+
+    return response.data;
+};
+export const TodosTickets = async (usuarioId) => {
+    const response = await axios.get(
+        `${API_URL}/todos-tickets/${usuarioId}`
+    );
+
+    return response.data;
+};

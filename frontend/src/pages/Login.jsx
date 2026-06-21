@@ -1,147 +1,248 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../services/authService";
+
 import logo from "../assets/logo.png";
+import portada from "../assets/portada2.png";
 
 function Login() {
-const navigate = useNavigate();
+    const navigate = useNavigate();
 
-const [correo, setCorreo] = useState("");
-const [password, setPassword] = useState("");
-const [loading, setLoading] = useState(false);
-const [error, setError] = useState("");
+    const [correo, setCorreo] = useState("");
+    const [password, setPassword] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
 
-const handleLogin = async (e) => {
-    e.preventDefault();
+    const handleLogin = async (e) => {
+        e.preventDefault();
 
-    setError("");
+        setError("");
 
-    try {
-        setLoading(true);
+        try {
+            setLoading(true);
 
-        const data = await login(
-            correo,
-            password
-        );
+            const data = await login(
+                correo,
+                password
+            );
 
-        localStorage.setItem(
-            "usuario",
-            JSON.stringify(data.usuario)
-        );
+            localStorage.setItem(
+                "usuario",
+                JSON.stringify(data.usuario)
+            );
 
-        navigate("/dashboard");
+            navigate("/dashboard");
 
-    } catch (err) {
+        } catch (err) {
 
-        setError(
-            err.response?.data?.message ||
-            "Credenciales incorrectas"
-        );
+            setError(
+                err.response?.data?.message ||
+                "Datos incorrectos"
+            );
 
-    } finally {
+        } finally {
 
-        setLoading(false);
+            setLoading(false);
 
-    }
-};
+        }
+    };
 
-return (
-    <div className="min-h-screen flex items-center justify-center bg-blue-100">
+    return (
 
-        <div className="w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden">
+        <div className="min-h-screen bg-slate-100 flex">
 
-            <div className="bg-sky-700 h-3"></div>
+            {/* PANEL IZQUIERDO */}
 
-            <div className="p-10">
+            <div className="hidden lg:flex w-1/2 bg-white border-r border-slate-200 items-center justify-center">
 
-                <div className="flex flex-col items-center">
+                <div className="max-w-xl px-10 text-center">
 
                     <img
-                        src={logo}
-                        alt="Logo"
-                        className="w-48 h-48 object-contain mb-4"
+                        src={portada}
+                        alt="Portada"
+                        className="w-full max-w-md mx-auto object-contain"
                     />
 
-                    <h1 className="text-3xl font-bold text-sky-800">
-                        Mesa de Ayuda
+                    <h1 className="mt-8 text-3xl font-bold text-slate-800">
+                        Sistema de Mesa de Ayuda
                     </h1>
 
-                    <p className="text-gray-500 mt-2 text-center">
-                        Sistema de Gestión de Tickets
+                    <p className="mt-4 text-slate-600 leading-relaxed">
+                        Gestiona incidencias, solicitudes, requerimientos
+                        tecnológicos y realiza seguimiento a cada ticket
+                        desde una única plataforma.
                     </p>
+
+                    <div className="mt-8 flex justify-center gap-4">
+
+                        <div className="bg-slate-50 border border-slate-200 px-5 py-3 rounded-lg">
+                            <p className="text-sm font-medium text-slate-700">
+                                Soporte TI
+                            </p>
+                        </div>
+
+                        <div className="bg-slate-50 border border-slate-200 px-5 py-3 rounded-lg">
+                            <p className="text-sm font-medium text-slate-700">
+                                Tickets
+                            </p>
+                        </div>
+
+                        <div className="bg-slate-50 border border-slate-200 px-5 py-3 rounded-lg">
+                            <p className="text-sm font-medium text-slate-700">
+                                Seguimiento
+                            </p>
+                        </div>
+
+                    </div>
 
                 </div>
 
-                <form
-                    onSubmit={handleLogin}
-                    className="mt-8"
-                >
+            </div>
 
-                    <div className="mb-5">
+            {/* PANEL DERECHO */}
 
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Correo Electrónico
-                        </label>
+            <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
 
-                        <input
-                            type="email"
-                            value={correo}
-                            onChange={(e) =>
-                                setCorreo(e.target.value)
-                            }
-                            placeholder="Correo electrónico"
-                            className="w-full px-4 py-3 border border-sky-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
-                            required
-                        />
+                <div className="w-full max-w-md">
 
-                    </div>
+                    <div className="bg-white border border-slate-200 rounded-xl shadow-lg">
 
-                    <div className="mb-5">
+                        {/* CABECERA */}
 
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Contraseña
-                        </label>
+                        <div className="border-b border-slate-200 p-8 text-center">
 
-                        <input
-                            type="password"
-                            value={password}
-                            onChange={(e) =>
-                                setPassword(e.target.value)
-                            }
-                            placeholder="********"
-                            className="w-full px-4 py-3 border border-sky-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
-                            required
-                        />
+                            <img
+                                src={logo}
+                                alt="Logo"
+                                className="w-44 h-44 mx-auto object-contain"
+                            />
 
-                    </div>
+                            <h2 className=" text-2xl font-bold text-slate-800">
+                                LG Soporte
+                            </h2>
 
-                    {error && (
-                        <div className="mb-4 bg-red-100 border border-red-300 text-red-700 px-4 py-3 rounded-xl text-sm">
-                            {error}
+                            <p className="mt-1 text-sm text-slate-500">
+                                Mesa de Ayuda Corporativa
+                            </p>
+
                         </div>
-                    )}
 
-                    <button
-                        type="submit"
-                        disabled={loading}
-                        className="w-full bg-sky-600 hover:bg-sky-700 text-white font-semibold py-3 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg disabled:opacity-60"
-                    >
-                        {loading
-                            ? "Ingresando..."
-                            : "Iniciar Sesión"}
-                    </button>
+                        {/* FORMULARIO */}
 
-                </form>
+                        <div className="p-8">
 
-                <div className="mt-8 border-t border-gray-200 pt-4 text-center">
+                            <form
+                                onSubmit={handleLogin}
+                            >
 
-                    <p className="text-sm text-gray-500">
-                        LG Soporte
-                    </p>
+                                <div className="mb-5">
 
-                    <p className="text-xs text-gray-400 mt-1">
-                        Mesa de Ayuda Corporativa
-                    </p>
+                                    <label className="block text-sm font-medium text-slate-700 mb-2">
+                                        Correo Electrónico
+                                    </label>
+
+                                    <input
+                                        type="email"
+                                        value={correo}
+                                        onChange={(e) =>
+                                            setCorreo(e.target.value)
+                                        } 
+                                        className="
+                                            w-full
+                                            px-4
+                                            py-3
+                                            border
+                                            border-slate-300
+                                            rounded-lg
+                                            bg-white
+                                            focus:outline-none
+                                            focus:ring-2
+                                            focus:ring-blue-600
+                                            focus:border-blue-600
+                                        "
+                                        required
+                                    />
+
+                                </div>
+
+                                <div className="mb-5">
+
+                                    <label className="block text-sm font-medium text-slate-700 mb-2">
+                                        Contraseña
+                                    </label>
+
+                                    <input
+                                        type="password"
+                                        value={password}
+                                        onChange={(e) =>
+                                            setPassword(e.target.value)
+                                        }
+                                        className="
+                                            w-full
+                                            px-4
+                                            py-3
+                                            border
+                                            border-slate-300
+                                            rounded-lg
+                                            bg-white
+                                            focus:outline-none
+                                            focus:ring-2
+                                            focus:ring-blue-600
+                                            focus:border-blue-600
+                                        "
+                                        required
+                                    />
+
+                                </div>
+
+                                {error && (
+
+                                    <div className="
+                                        mb-5
+                                        bg-red-50
+                                        border
+                                        border-red-200
+                                        text-red-600
+                                        px-4
+                                        py-3
+                                        rounded-lg
+                                        text-sm
+                                    ">
+                                        {error}
+                                    </div>
+
+                                )}
+
+                                <button
+                                    type="submit"
+                                    disabled={loading}
+                                    className="
+                                        w-full
+                                        py-3
+                                        bg-blue-700
+                                        hover:bg-blue-800
+                                        text-white
+                                        font-medium
+                                        rounded-lg
+                                        transition
+                                        disabled:opacity-70
+                                    "
+                                >
+                                    {
+                                        loading
+                                            ? "Ingresando..."
+                                            : "Iniciar Sesión"
+                                    }
+                                </button>
+
+                            </form>
+
+
+                        </div>
+
+    
+
+                    </div>
 
                 </div>
 
@@ -149,9 +250,7 @@ return (
 
         </div>
 
-    </div>
-);
-
+    );
 }
 
 export default Login;
